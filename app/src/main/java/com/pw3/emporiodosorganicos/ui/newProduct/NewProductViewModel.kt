@@ -27,6 +27,4 @@ class NewProductViewModel @Inject constructor(
             _onSaveFailed.value = true
         }
     }
-
-
 }
