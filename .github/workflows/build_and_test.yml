@@ -1,8 +1,8 @@
 name: Android Build and Test
 
 on:
-  push:
-    branches: [ "master" ]
+#   push:
+#     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -22,7 +22,9 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
     - name: Build with Gradle
       run: ./gradlew buildDebug
+      
     - name: Build with Gradle
       run: ./gradlew testDebug
