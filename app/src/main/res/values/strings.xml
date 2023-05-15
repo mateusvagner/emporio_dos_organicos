@@ -3,4 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_new_product">Novo Produto</string>
+    <string name="title_all_products">Todos Produtos</string>
+    <string name="title_about">Sobre a Empório</string>
+    <string name="description">Description</string>
+    <string name="value">Valor</string>
+    <string name="supplier">Fornecedor</string>
+    <string name="name">Nome</string>
+    <string name="save">Salvar</string>
 </resources>
