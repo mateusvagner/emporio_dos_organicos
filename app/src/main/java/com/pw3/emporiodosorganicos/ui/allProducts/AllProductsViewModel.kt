@@ -1,10 +1,10 @@
-package com.pw3.emporiodosorganicos.ui.dashboard
+package com.pw3.emporiodosorganicos.ui.allProducts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class AllProductsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

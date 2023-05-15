@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/home">
+    app:startDestination="@+id/new_product">
 
     <fragment
-        android:id="@+id/home"
-        android:name="com.pw3.emporiodosorganicos.ui.home.HomeFragment"
+        android:id="@+id/new_product"
+        android:name="com.pw3.emporiodosorganicos.ui.newProduct.NewProductFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/dashboard"
-        android:name="com.pw3.emporiodosorganicos.ui.dashboard.DashboardFragment"
+        android:name="com.pw3.emporiodosorganicos.ui.allProducts.AllProductsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/notifications"
-        android:name="com.pw3.emporiodosorganicos.ui.notifications.NotificationsFragment"
+        android:name="com.pw3.emporiodosorganicos.ui.about.AboutFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
