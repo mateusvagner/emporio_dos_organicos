@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,12 +91,20 @@ class NewProductFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.onProductSaved.observe(viewLifecycleOwner) {
-            //TODO show snackbar success
+        viewModel.onProductSaved.observe(viewLifecycleOwner) { saved ->
+            if (saved)
+                showSnackbar("Produto salvo com sucessp!")
         }
 
-        viewModel.onSaveFailed.observe(viewLifecycleOwner) {
-            //TODO show snackbar error
+        viewModel.onSaveFailed.observe(viewLifecycleOwner) { failed ->
+           if (failed)
+               showSnackbar("Ops! Algo deu errado.")
         }
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar
+            .make(requireView(), message, Snackbar.LENGTH_LONG)
+            .show()
     }
 }

@@ -3,9 +3,12 @@ package com.pw3.emporiodosorganicos.ui.newProduct
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,11 +23,13 @@ class NewProductViewModel @Inject constructor(
     val onSaveFailed: LiveData<Boolean> get() = _onSaveFailed
 
     fun saveProduct(product: ProductEntity) {
-        try {
-            productRepository.insertAll(product)
-            _onProductSaved.value = true
-        } catch (exception: RuntimeException) {
-            _onSaveFailed.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                productRepository.insertAll(product)
+                _onProductSaved.postValue(true)
+            } catch (exception: RuntimeException) {
+                _onSaveFailed.postValue(true)
+            }
         }
     }
 }
