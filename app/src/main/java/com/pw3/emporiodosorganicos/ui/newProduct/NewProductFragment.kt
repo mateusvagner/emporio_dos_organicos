@@ -63,7 +63,8 @@ class NewProductFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when(menuItem.itemId) {
-                    R.id.about -> { // TODO improve 
+                    R.id.about -> {
+                        findNavController().popBackStack()
                         findNavController().navigate(
                             NewProductFragmentDirections.actionGlobalAbout()
                         )
