@@ -9,17 +9,17 @@
         android:id="@+id/new_product"
         android:name="com.pw3.emporiodosorganicos.ui.newProduct.NewProductFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_new_product" />
 
     <fragment
         android:id="@+id/dashboard"
         android:name="com.pw3.emporiodosorganicos.ui.allProducts.AllProductsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_all_products" />
 
     <fragment
         android:id="@+id/notifications"
         android:name="com.pw3.emporiodosorganicos.ui.about.AboutFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_about" />
 </navigation>
