@@ -11,4 +11,5 @@
     <string name="supplier">Fornecedor</string>
     <string name="name">Nome</string>
     <string name="save">Salvar</string>
+    <string name="value_currency">R$ %1$s</string>
 </resources>
