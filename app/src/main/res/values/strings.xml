@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_new_product">Novo Produto</string>
+    <string name="title_edit_product">Editar Produto</string>
     <string name="title_all_products">Todos Produtos</string>
     <string name="title_about">Sobre a Empório</string>
     <string name="description">Description</string>

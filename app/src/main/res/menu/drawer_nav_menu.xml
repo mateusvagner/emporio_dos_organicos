@@ -8,12 +8,12 @@
             android:title="@string/title_new_product" />
 
         <item
-            android:id="@+id/dashboard"
+            android:id="@+id/all_products"
             android:icon="@drawable/ic_all_products"
             android:title="@string/title_all_products" />
 
         <item
-            android:id="@+id/notifications"
+            android:id="@+id/about"
             android:icon="@drawable/ic_about"
             android:title="@string/title_about" />
     </group>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentAllProductsBinding
@@ -60,6 +61,11 @@ class AllProductsFragment : Fragment() {
     }
 
     private fun onProductClicked(productEntity: ProductEntity) {
+        if (productEntity.id != 0) {
+            findNavController().navigate(
+                AllProductsFragmentDirections.actionDashboardToEditProductFragment(productEntity.id)
+            )
+        }
 
     }
 

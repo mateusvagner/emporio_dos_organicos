@@ -8,6 +8,9 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao
 ): ProductRepository {
+    override fun findById(id: Int): ProductEntity {
+        return productDao.findById(id)
+    }
 
     override fun getAll(): List<ProductEntity> {
         return productDao.getAll()
@@ -19,5 +22,9 @@ class ProductRepositoryImpl @Inject constructor(
 
     override fun delete(product: ProductEntity) {
         productDao.delete(product)
+    }
+
+    override fun updateAll(vararg products: ProductEntity) {
+        productDao.updateAll(*products)
     }
 }

@@ -12,14 +12,34 @@
         tools:layout="@layout/fragment_new_product" />
 
     <fragment
-        android:id="@+id/dashboard"
+        android:id="@+id/all_products"
         android:name="com.pw3.emporiodosorganicos.ui.allProducts.AllProductsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_all_products" />
+        tools:layout="@layout/fragment_all_products">
+        <action
+            android:id="@+id/action_dashboard_to_editProductFragment"
+            app:destination="@id/edit_productFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/notifications"
+        android:id="@+id/about"
         android:name="com.pw3.emporiodosorganicos.ui.about.AboutFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/edit_productFragment"
+        android:name="com.pw3.emporiodosorganicos.ui.editProduct.EditProductFragment"
+        android:label="@string/title_edit_product"
+        tools:layout="@layout/fragment_new_product">
+        <argument
+            android:name="productId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_about"
+        app:destination="@id/about" />
+
 </navigation>

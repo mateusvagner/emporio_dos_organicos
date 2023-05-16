@@ -1,30 +1,31 @@
-package com.pw3.emporiodosorganicos.ui.newProduct
+package com.pw3.emporiodosorganicos.ui.editProduct
 
-
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
-import com.pw3.emporiodosorganicos.R
+import androidx.navigation.fragment.navArgs
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentNewProductBinding
 import com.pw3.emporiodosorganicos.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class NewProductFragment : Fragment() {
+class EditProductFragment : Fragment() {
 
     private var _binding: FragmentNewProductBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: NewProductViewModel by viewModels()
+    private val viewModel: EditProductViewModel by viewModels()
+
+    private val args: EditProductFragmentArgs by navArgs()
+
+    private var product: ProductEntity? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,43 +38,13 @@ class NewProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupMenu()
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
         setupListeners()
         setupObservers()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        binding.editTextName.text = null
-        binding.editTextDescription.text = null
-        binding.editTextValue.text = null
-        binding.editTextSupplier.text = null
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setupMenu() {
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.about_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when(menuItem.itemId) {
-                    R.id.about -> { // TODO improve 
-                        findNavController().navigate(
-                            NewProductFragmentDirections.actionGlobalAbout()
-                        )
-                        return true
-                    }
-                    else -> false
-                }
-            }
-
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        viewModel.findProduct(args.productId)
     }
 
     private fun setupListeners() {
@@ -86,14 +57,14 @@ class NewProductFragment : Fragment() {
             if (!allEntriesValid)
                 return@setOnClickListener
 
-            val product = ProductEntity(
-                name = binding.editTextName.text.toString(),
-                description = binding.editTextDescription.text.toString(),
-                value = binding.editTextValue.text.toString(),
-                supplier = binding.editTextSupplier.text.toString(),
-            )
+            product?.let {
+                it.name = binding.editTextName.text.toString()
+                it.description = binding.editTextDescription.text.toString()
+                it.value = binding.editTextValue.text.toString()
+                it.supplier = binding.editTextSupplier.text.toString()
 
-            viewModel.saveProduct(product)
+                viewModel.updateProduct(it)
+            }
         }
     }
 
@@ -132,6 +103,15 @@ class NewProductFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        viewModel.product.observe(viewLifecycleOwner) {
+            product = it
+
+            binding.editTextName.setText(it.name)
+            binding.editTextDescription.setText(it.description)
+            binding.editTextValue.setText(it.value)
+            binding.editTextSupplier.setText(it.supplier)
+        }
+
         viewModel.onProductSaved.observe(viewLifecycleOwner) { saved ->
             if (saved)
                 showSnackbar("Produto salvo com sucessp!")
