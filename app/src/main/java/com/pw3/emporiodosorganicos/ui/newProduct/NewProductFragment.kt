@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
-import com.pw3.emporiodosorganicos.databinding.FragmentHomeBinding
+import com.pw3.emporiodosorganicos.databinding.FragmentNewProductBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewProductFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentNewProductBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: NewProductViewModel by viewModels()
@@ -24,7 +24,7 @@ class NewProductFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentNewProductBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,6 +34,13 @@ class NewProductFragment : Fragment() {
         setupObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.editTextName.text = null
+        binding.editTextDescription.text = null
+        binding.editTextValue.text = null
+        binding.editTextSupplier.text = null
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -47,9 +54,9 @@ class NewProductFragment : Fragment() {
 
             val product = ProductEntity(
                 name = binding.editTextName.text.toString(),
-                description = binding.editTextName.text.toString(),
-                value = binding.editTextName.text.toString(),
-                supplier = binding.editTextName.text.toString(),
+                description = binding.editTextDescription.text.toString(),
+                value = binding.editTextValue.text.toString(),
+                supplier = binding.editTextSupplier.text.toString(),
             )
 
             viewModel.saveProduct(product)

@@ -4,35 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.pw3.emporiodosorganicos.databinding.FragmentDashboardBinding
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.pw3.emporiodosorganicos.databinding.FragmentAllProductsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllProductsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentAllProductsBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: AllProductsViewModel by viewModels()
+
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val allProductsViewModel =
-            ViewModelProvider(this)[AllProductsViewModel::class.java]
+        _binding = FragmentAllProductsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListeners()
+        setupObservers()
+        setupAdapter()
 
-        val textView: TextView = binding.textDashboard
-        allProductsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        viewModel.getAllProducts()
+    }
+
+    private fun setupListeners() {
+
+    }
+
+    private fun setupObservers() {
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            productAdapter.submitList(products)
         }
-        return root
+    }
+
+    private fun setupAdapter() {
+        productAdapter = ProductAdapter(viewModel::deleteProduct)
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = productAdapter
     }
 
     override fun onDestroyView() {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Product Name" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintEnd_toStartOf="@+id/value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="Product Description" />
+
+    <TextView
+        android:id="@+id/value"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/description"
+        app:layout_constraintEnd_toStartOf="@id/delete_button"
+        app:layout_constraintTop_toTopOf="@id/name"
+        tools:text="R$ 100.00" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:backgroundTint="@color/colorAlert"
+        app:icon="@drawable/ic_delete"
+        app:iconTint="@color/white"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

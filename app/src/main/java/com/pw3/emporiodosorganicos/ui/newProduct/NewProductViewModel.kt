@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.repository.ProductRepository
+import com.pw3.emporiodosorganicos.util.SingleLiveEventLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,10 +17,10 @@ class NewProductViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
-    private val _onProductSaved: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _onProductSaved: MutableLiveData<Boolean> = SingleLiveEventLiveData()
     val onProductSaved: LiveData<Boolean> get() = _onProductSaved
 
-    private val _onSaveFailed: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _onSaveFailed: MutableLiveData<Boolean> = SingleLiveEventLiveData()
     val onSaveFailed: LiveData<Boolean> get() = _onSaveFailed
 
     fun saveProduct(product: ProductEntity) {
