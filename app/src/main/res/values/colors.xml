@@ -13,5 +13,7 @@
     <color name="colorPrimary">#81CC29</color>
     <color name="colorPrimaryVariant">#41B93C</color>
     <color name="colorAlert">#FFF44336</color>
+    <color name="cardBackground">#FFCDFFCD</color>
+    <color name="colorOnCardBackground">#FF002800</color>
 
 </resources>

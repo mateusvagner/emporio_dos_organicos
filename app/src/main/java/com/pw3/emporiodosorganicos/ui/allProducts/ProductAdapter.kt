@@ -9,7 +9,10 @@ import com.pw3.emporiodosorganicos.R
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.LayoutProductItemBinding
 
-class ProductAdapter(private val onDeleteClicked: (ProductEntity) -> Unit) :
+class ProductAdapter(
+    private val onProductClicked: (ProductEntity) -> Unit,
+    private val onDeleteClicked: (ProductEntity) -> Unit
+) :
     ListAdapter<ProductEntity, ProductAdapter.ProductItemViewHolder>(
         CoffeeDiffUtil()
     ) {
@@ -40,6 +43,10 @@ class ProductAdapter(private val onDeleteClicked: (ProductEntity) -> Unit) :
 
             binding.deleteButton.setOnClickListener {
                 onDeleteClicked(product)
+            }
+
+            binding.root.setOnClickListener {
+                onProductClicked(product)
             }
         }
     }

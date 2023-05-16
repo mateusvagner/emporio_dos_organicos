@@ -1,15 +1,19 @@
 package com.pw3.emporiodosorganicos.ui.newProduct
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentNewProductBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class NewProductFragment : Fragment() {
@@ -41,6 +45,7 @@ class NewProductFragment : Fragment() {
         binding.editTextValue.text = null
         binding.editTextSupplier.text = null
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -48,6 +53,10 @@ class NewProductFragment : Fragment() {
 
     private fun setupListeners() {
         binding.saveButton.setOnClickListener {
+            val imm: InputMethodManager? =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(requireView().windowToken, 0)
+
             val allEntriesValid = checkUserEntries()
             if (!allEntriesValid)
                 return@setOnClickListener
@@ -104,8 +113,8 @@ class NewProductFragment : Fragment() {
         }
 
         viewModel.onSaveFailed.observe(viewLifecycleOwner) { failed ->
-           if (failed)
-               showSnackbar("Ops! Algo deu errado.")
+            if (failed)
+                showSnackbar("Ops! Algo deu errado.")
         }
     }
 

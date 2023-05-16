@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentAllProductsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,10 +50,17 @@ class AllProductsFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        productAdapter = ProductAdapter(viewModel::deleteProduct)
+        productAdapter = ProductAdapter(
+            ::onProductClicked,
+            viewModel::deleteProduct
+        )
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = productAdapter
+    }
+
+    private fun onProductClicked(productEntity: ProductEntity) {
+
     }
 
     override fun onDestroyView() {
