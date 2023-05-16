@@ -1,7 +1,6 @@
 package com.pw3.emporiodosorganicos.ui.newProduct
 
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.*
