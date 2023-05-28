@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentAllProductsBinding
+import com.pw3.emporiodosorganicos.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,15 +34,12 @@ class AllProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
+
         setupObservers()
         setupAdapter()
 
         viewModel.getAllProducts()
-    }
-
-    private fun setupListeners() {
-
+        showSnackbar("Clique no produto para editar.")
     }
 
     private fun setupObservers() {
@@ -66,7 +64,6 @@ class AllProductsFragment : Fragment() {
                 AllProductsFragmentDirections.actionDashboardToEditProductFragment(productEntity.id)
             )
         }
-
     }
 
     override fun onDestroyView() {

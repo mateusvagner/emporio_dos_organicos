@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pw3.emporiodosorganicos.R
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.LayoutProductItemBinding
+import com.pw3.emporiodosorganicos.util.showDialog
 
 class ProductAdapter(
     private val onProductClicked: (ProductEntity) -> Unit,
@@ -42,7 +43,14 @@ class ProductAdapter(
             binding.value.text = context.getString(R.string.value_currency, product.value)
 
             binding.deleteButton.setOnClickListener {
-                onDeleteClicked(product)
+                showDialog(
+                    context,
+                    R.string.delete_product,
+                    R.string.delete_product_message,
+                    R.string.delete
+                ) {
+                    onDeleteClicked(product)
+                }
             }
 
             binding.root.setOnClickListener {

@@ -9,9 +9,12 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.pw3.emporiodosorganicos.R
 import com.pw3.emporiodosorganicos.database.entity.ProductEntity
 import com.pw3.emporiodosorganicos.databinding.FragmentNewProductBinding
+import com.pw3.emporiodosorganicos.util.showDialog
 import com.pw3.emporiodosorganicos.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -57,14 +60,26 @@ class EditProductFragment : Fragment() {
             if (!allEntriesValid)
                 return@setOnClickListener
 
-            product?.let {
-                it.name = binding.editTextName.text.toString()
-                it.description = binding.editTextDescription.text.toString()
-                it.value = binding.editTextValue.text.toString()
-                it.supplier = binding.editTextSupplier.text.toString()
-
-                viewModel.updateProduct(it)
+            showDialog(
+                requireActivity(),
+                R.string.update_product,
+                R.string.update_product_message,
+                R.string.save
+            ) {
+                updateProduct()
             }
+
+        }
+    }
+
+    private fun updateProduct() {
+        product?.let {
+            it.name = binding.editTextName.text.toString()
+            it.description = binding.editTextDescription.text.toString()
+            it.value = binding.editTextValue.text.toString()
+            it.supplier = binding.editTextSupplier.text.toString()
+
+            viewModel.updateProduct(it)
         }
     }
 
@@ -113,13 +128,15 @@ class EditProductFragment : Fragment() {
         }
 
         viewModel.onProductSaved.observe(viewLifecycleOwner) { saved ->
-            if (saved)
-                showSnackbar("Produto salvo com sucessp!")
+            if (saved) {
+                showSnackbar(getString(R.string.product_saved_success))
+                findNavController().popBackStack()
+            }
         }
 
         viewModel.onSaveFailed.observe(viewLifecycleOwner) { failed ->
             if (failed)
-                showSnackbar("Ops! Algo deu errado.")
+                showSnackbar(getString(R.string.product_saved_failed))
         }
     }
 }
