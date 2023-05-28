@@ -41,14 +41,6 @@ class NewProductFragment : Fragment() {
         setupObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.editTextName.text = null
-        binding.editTextDescription.text = null
-        binding.editTextValue.text = null
-        binding.editTextSupplier.text = null
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -61,7 +53,7 @@ class NewProductFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when(menuItem.itemId) {
+                return when (menuItem.itemId) {
                     R.id.about -> {
                         findNavController().popBackStack()
                         findNavController().navigate(
@@ -69,6 +61,7 @@ class NewProductFragment : Fragment() {
                         )
                         return true
                     }
+
                     else -> false
                 }
             }
@@ -133,13 +126,23 @@ class NewProductFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.onProductSaved.observe(viewLifecycleOwner) { saved ->
-            if (saved)
+            if (saved) {
                 showSnackbar("Produto salvo com sucessp!")
+                clearFields()
+            }
         }
 
         viewModel.onSaveFailed.observe(viewLifecycleOwner) { failed ->
             if (failed)
                 showSnackbar("Ops! Algo deu errado.")
         }
+    }
+
+    private fun clearFields() {
+        binding.editTextSupplier.text = null
+        binding.editTextValue.text = null
+        binding.editTextDescription.text = null
+        binding.editTextName.text = null
+        binding.layoutName.requestFocus()
     }
 }
