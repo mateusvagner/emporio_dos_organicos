@@ -8,11 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_gray">#646464</color>
+    <color name="light_gray">#8C8C8C</color>
 
     <!-- Customize your theme here. -->
     <color name="colorPrimary">#81CC29</color>
     <color name="colorPrimaryVariant">#41B93C</color>
     <color name="colorAlert">#FFF44336</color>
+    <color name="colorDelete">#F07864</color>
     <color name="cardBackground">#FFCDFFCD</color>
     <color name="colorOnCardBackground">#FF002800</color>
 
