@@ -7,11 +7,28 @@
     <string name="title_edit_product">Editar Produto</string>
     <string name="title_all_products">Todos Produtos</string>
     <string name="title_about">Sobre a Empório</string>
+
     <string name="description">Description</string>
     <string name="value">Valor</string>
     <string name="supplier">Fornecedor</string>
     <string name="name">Nome</string>
+
     <string name="save">Salvar</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cencelar</string>
+    <string name="delete">Deletar</string>
+
     <string name="value_currency">R$ %1$s</string>
     <string name="about_description">SERVIÇO DE CONSULTA A PRODUTOS ORGÂNICOS 2023</string>
+
+    <string name="update_product">Deseja atualizar o produto?</string>
+    <string name="update_product_message">Ao clicar em salvar você irá atualizar o produto</string>
+
+    <string name="delete_product">Deseja deletar o produto?</string>
+    <string name="delete_product_message">Ao clicar em deletar você irá apagar o produto</string>
+
+    <string name="product_saved_success">Produto salvo com sucesso!</string>
+    <string name="product_saved_failed">Ops! Algo deu errado.</string>
+
+
 </resources>
