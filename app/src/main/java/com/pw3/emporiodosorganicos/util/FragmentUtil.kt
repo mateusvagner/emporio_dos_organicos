@@ -7,6 +7,6 @@ import com.pw3.emporiodosorganicos.R
 fun Fragment.showSnackbar(message: String) {
     Snackbar
         .make(requireView(), message, Snackbar.LENGTH_LONG)
-        .setAnchorView(R.id.bottom_nav_view)
+//        .setAnchorView(R.id.bottom_nav_view)
         .show()
 }
